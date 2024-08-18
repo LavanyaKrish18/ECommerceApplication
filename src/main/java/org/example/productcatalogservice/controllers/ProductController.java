@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
+@RequestMapping("/products")
 public class ProductController {
 
     @Autowired
@@ -24,9 +25,14 @@ public class ProductController {
     @Autowired
     private ProductConverter productConverter;
 
-    @GetMapping("/products")
+    @GetMapping
     public List<ProductDto> getProducts() {
-        return null;
+        List<Product> products = productService.getAllProducts();
+        List<ProductDto> productDtos = new ArrayList<>();
+        for (Product product : products) {
+            productDtos.add(productConverter.getProductDto(product));
+        }
+        return productDtos;
     }
 
 //    @GetMapping("/products/{id}")
@@ -36,7 +42,7 @@ public class ProductController {
 //    }
 
     // To override dispatcher servlet's response
-    @GetMapping("/products/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<ProductDto> getProductById(@PathVariable("id") Long productId) {
         try {
             if (productId <= 0){
@@ -54,9 +60,15 @@ public class ProductController {
         }
     }
 
-    @PostMapping("/products")
+    @PostMapping
     public ProductDto createProduct(@RequestBody ProductDto productDto) {
         return null;
+    }
+
+    @PutMapping("{id}")
+    public ProductDto replaceProduct(@PathVariable Long id, @RequestBody ProductDto productDto) {
+        Product responseProduct = productService.replaceProduct(id, productConverter.getProduct(productDto));
+        return productConverter.getProductDto(responseProduct);
     }
 
     /* Old code not valid now
