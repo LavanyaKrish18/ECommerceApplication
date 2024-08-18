@@ -44,25 +44,20 @@ public class ProductController {
     // To override dispatcher servlet's response
     @GetMapping("{id}")
     public ResponseEntity<ProductDto> getProductById(@PathVariable("id") Long productId) {
-        try {
-            if (productId <= 0){
-                throw new IllegalArgumentException("Invalid product id");
-            }
-
-            Product product = productService.getProductById(productId);
-            ProductDto productDto = productConverter.getProductDto(product);
-            MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
-            headers.add("Response edited by", "Lavs");
-            return new ResponseEntity<>(productDto, headers, HttpStatus.OK);
-            //return new ResponseEntity<>(productDto, HttpStatus.INTERNAL_SERVER_ERROR);
-        } catch (IllegalArgumentException | NullPointerException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (productId <= 0){
+            throw new IllegalArgumentException("Invalid product id");
         }
+        Product product = productService.getProductById(productId);
+        ProductDto productDto = productConverter.getProductDto(product);
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+        headers.add("Response edited by", "Lavs");
+        return new ResponseEntity<>(productDto, headers, HttpStatus.OK);
     }
 
     @PostMapping
     public ProductDto createProduct(@RequestBody ProductDto productDto) {
-        return null;
+        Product responseProduct = productService.createProduct(productConverter.getProduct(productDto));
+        return productConverter.getProductDto(responseProduct);
     }
 
     @PutMapping("{id}")
