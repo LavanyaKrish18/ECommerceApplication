@@ -57,6 +57,17 @@ public class FakeStoreApiClient {
 //                FakeStoreProductDto.class).getBody();
     }
 
+    public FakeStoreProductDto replacePartialProduct(Long id, Product product) {
+        FakeStoreProductDto input = productConverter.getFakeStoreProductDto(product);
+        return requestForEntity("https://fakestoreapi.com/products/{id}", HttpMethod.PATCH, input,
+                FakeStoreProductDto.class, id).getBody();
+    }
+
+    public FakeStoreProductDto deleteProduct(Long id) {
+        return requestForEntity("https://fakestoreapi.com/products/{id}", HttpMethod.DELETE, null,
+                FakeStoreProductDto.class, id).getBody();
+    }
+
     // Separate methods available for get-getForEntity, post-postForEntity in RestTemplate class
     private <T> org.springframework.http.ResponseEntity<T> requestForEntity(java.lang.String url, HttpMethod httpMethod, @org.springframework.lang.Nullable java.lang.Object request, java.lang.Class<T> responseType, java.lang.Object... uriVariables) throws org.springframework.web.client.RestClientException {
         RestTemplate restTemplate = restTemplateBuilder.build();

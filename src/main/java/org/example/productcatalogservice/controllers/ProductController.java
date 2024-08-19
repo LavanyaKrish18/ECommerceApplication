@@ -54,18 +54,32 @@ public class ProductController {
         return new ResponseEntity<>(productDto, headers, HttpStatus.OK);
     }
 
-    @PostMapping
-    public ProductDto createProduct(@RequestBody ProductDto productDto) {
-        Product responseProduct = productService.createProduct(productConverter.getProduct(productDto));
-        return productConverter.getProductDto(responseProduct);
-    }
-
     @PutMapping("{id}")
     public ProductDto replaceProduct(@PathVariable Long id, @RequestBody ProductDto productDto) {
         Product responseProduct = productService.replaceProduct(id, productConverter.getProduct(productDto));
         return productConverter.getProductDto(responseProduct);
     }
 
+    //Not working - HttpClientErrorException
+    @PostMapping
+    public ProductDto createProduct(@RequestBody ProductDto productDto) {
+        Product responseProduct = productService.createProduct(productConverter.getProduct(productDto));
+        return productConverter.getProductDto(responseProduct);
+    }
+
+    //Not working - ResourceAccessException
+    @PatchMapping("{id}")
+    public ProductDto replacePartialProduct(@PathVariable Long id, @RequestBody ProductDto productDto) {
+        Product responseProduct = productService.replacePartialProduct(id, productConverter.getProduct(productDto));
+        return productConverter.getProductDto(responseProduct);
+    }
+
+    // Deleted product is printed, still i can get the product in GET Api request
+    @DeleteMapping("{id}")
+    public ProductDto deleteProduct(@PathVariable Long id) {
+        Product responseProduct = productService.deleteProduct(id);
+        return productConverter.getProductDto(responseProduct);
+    }
     /* Old code not valid now
     //Jackson responsible for converting object to Json and vice versa
     //ObjectMapper library used for Jackson in Java
