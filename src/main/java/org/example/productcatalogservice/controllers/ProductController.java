@@ -5,6 +5,7 @@ import org.example.productcatalogservice.models.Product;
 import org.example.productcatalogservice.services.IProductService;
 import org.example.productcatalogservice.services.ProductConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
@@ -20,6 +21,7 @@ import java.util.Objects;
 public class ProductController {
 
     @Autowired
+    @Qualifier("sps")
     private IProductService productService;
 
     @Autowired

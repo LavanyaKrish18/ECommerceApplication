@@ -18,6 +18,7 @@ public class ProductConverter {
         product.setPrice(fakeStoreProductDto.getPrice());
         product.setImageUrl(fakeStoreProductDto.getImage());
         Category category = new Category();
+        //category.setId(fakeStoreProductDto.getId()); fakeStoreDto doesn't have id for category
         category.setName(fakeStoreProductDto.getCategory());
         product.setCategory(category);
         return product;
@@ -32,6 +33,7 @@ public class ProductConverter {
         product.setImageUrl(productDto.getImageUrl());
         if (productDto.getCategoryDto() != null) {
             Category category = new Category();
+            category.setId(productDto.getCategoryDto().getId());
             category.setName(productDto.getCategoryDto().getName());
             product.setCategory(category);
         }
@@ -63,6 +65,7 @@ public class ProductConverter {
         fakeStoreProductDto.setPrice(product.getPrice());
         fakeStoreProductDto.setImage(product.getImageUrl());
         if (product.getCategory() != null) {
+            //fakeStoreProductDto.setId(product.getCategory().getId()); fakeStoreDto doesn't have id for category
             fakeStoreProductDto.setCategory(product.getCategory().getName());
         }
         return fakeStoreProductDto;

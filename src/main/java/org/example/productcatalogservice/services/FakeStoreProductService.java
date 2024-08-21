@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Service
+@Service("fkps")
 public class FakeStoreProductService implements IProductService {
 
     @Autowired //create constructor or use this [both are same] //singleton object
