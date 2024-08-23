@@ -18,4 +18,7 @@ public class ProductDto {
     private Double price;
 
     private CategoryDto categoryDto;
+
+    private Boolean isPrime; // Remove after test
+
 }
