@@ -8,10 +8,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+// i don't want to override function, abstract fns. just wanted to use Jpa fns.
+// Hence interface created instead of class
+// File creation is mandatory bcoz we will interact with JpaRepository using this class only
 @Repository
 public interface ProductRepo extends JpaRepository<Product, Long> {
 
-    //File creation is mandatory bcoz we will interact with JpaRepository using this class only
     //Declaring just for reference. Can be commented
     //Product save(Product product);
 
