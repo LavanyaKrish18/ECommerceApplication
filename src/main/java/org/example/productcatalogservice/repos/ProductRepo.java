@@ -25,9 +25,9 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
     // so modified 2 rows with true and 1 with false
     // executed these below 2 functions and tested.
     // Then commented
-    List<Product> findAllByIsPrime(boolean isPrime); //Remove after test
+    //List<Product> findAllByIsPrime(boolean isPrime);
 
-    List<Product> findAllByIsPrimeTrue();// Remove after test
+    //List<Product> findAllByIsPrimeTrue();
 
     //List<Product> findAllOrderByPriceDesc();
 

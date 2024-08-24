@@ -19,6 +19,6 @@ public class ProductDto {
 
     private CategoryDto categoryDto;
 
-    private Boolean isPrime; // Remove after test
+    //private Boolean isPrime;
 
 }

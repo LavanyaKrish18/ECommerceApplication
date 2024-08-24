@@ -31,7 +31,7 @@ public class ProductConverter {
         product.setDescription(productDto.getDescription());
         product.setPrice(productDto.getPrice());
         product.setImageUrl(productDto.getImageUrl());
-        product.setIsPrime(productDto.getIsPrime()); // Remove after test
+        //product.setIsPrime(productDto.getIsPrime());
         if (productDto.getCategoryDto() != null) {
             Category category = new Category();
             category.setId(productDto.getCategoryDto().getId());
@@ -48,7 +48,7 @@ public class ProductConverter {
         productDto.setDescription(product.getDescription());
         productDto.setPrice(product.getPrice());
         productDto.setImageUrl(product.getImageUrl());
-        productDto.setIsPrime(product.getIsPrime()); // Remove after test
+        //productDto.setIsPrime(product.getIsPrime());
         Category category = product.getCategory();
         if (category != null) {
             CategoryDto categoryDto = new CategoryDto();

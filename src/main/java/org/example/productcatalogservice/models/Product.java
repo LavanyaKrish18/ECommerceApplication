@@ -21,6 +21,6 @@ public class Product extends BaseModel{
     @ManyToOne(cascade = CascadeType.ALL)
     private Category category;
 
-    // TODO : Remove isPrime feature and create schema and run .sql Refer comment : "// Remove after test"
-    private Boolean isPrime; // Remove after test
+    // Done : Remove isPrime feature and create schema and run .sql Refer comment : "// Remove after test"
+    //private Boolean isPrime;
 }
