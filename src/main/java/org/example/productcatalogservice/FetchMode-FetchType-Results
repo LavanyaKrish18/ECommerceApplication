@@ -1,0 +1,43 @@
+FetchType        FetchMode          Result
+
+LAZY             SELECT             Asked For Products - Queries - 2 select
+                                    Not Asked For Products - Queries - 1 select
+
+
+EAGER            SELECT             Asked For Products - Queries - 2 select
+                                    Not Asked For Products - Queries - 2 select
+
+
+
+LAZY             JOIN               Asked For Products - Queries - 1 join
+                                    Not Asked For Products - Queries - 1 join
+
+
+
+EAGER            JOIN               Asked For Products - Queries - 1 join
+                                    Not Asked For Products - Queries - 1 join
+
+
+
+LAZY             SUBSELECT           Asked For Products - Queries - 2 select
+                                     Not Asked For Products - Queries - 1 select
+
+
+
+EAGER            SUBSELECT          Asked For Products - Queries - 2 select
+                                    Not Asked For Products - Queries - 2 select
+//Hypothesis
+Fetch Mode JOIN has dominance over any fetch type
+Incase of Fetch mode select and subselect, Fetch type gets the dominance
+
+    subselect 1 category = parent -> n children. Hence subquery not required here
+    [Clue: When you have 2 loops subqueries will work]
+    collection / batch fetching - subquery works, 1 row - doesn't work
+
+// Only fetch type results
+        //Fetch type of Category class - products field is Lazy
+            // If asked for products 2 queries - fetch category and products tables
+            // If not asked for products 1 query - fetch category table
+        //Fetch type of Category class - products field is Eager - Run 1 left join query
+            // If asked for products 2 queries - fetch category and products tables
+            // If not asked for products 2 queries - fetch category and products tables
