@@ -21,7 +21,7 @@ import java.util.Objects;
 public class ProductController {
 
     @Autowired
-    @Qualifier("sps")
+    //@Qualifier("sps")
     private IProductService productService;
 
     @Autowired
@@ -46,7 +46,9 @@ public class ProductController {
     // To override dispatcher servlet's response
     @GetMapping("{id}")
     public ResponseEntity<ProductDto> getProductById(@PathVariable("id") Long productId) {
-        if (productId <= 0){
+        if (productId == 0){
+            throw new IllegalArgumentException("Product id cannot be Zero");
+        }else if(productId < 0){
             throw new IllegalArgumentException("Invalid product id");
         }
         Product product = productService.getProductById(productId);
