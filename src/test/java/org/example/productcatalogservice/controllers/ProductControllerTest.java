@@ -5,7 +5,10 @@ import org.example.productcatalogservice.dtos.ProductDto;
 import org.example.productcatalogservice.models.Category;
 import org.example.productcatalogservice.models.Product;
 import org.example.productcatalogservice.services.IProductService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -22,6 +25,9 @@ class ProductControllerTest {
 
     @MockBean
     IProductService productService;
+
+    @Captor
+    ArgumentCaptor<Long> idCaptor;
 
     @Test
     public void Test_GetProductById_WithValidProductId_ReturnsProductSuccessfully() {
@@ -97,5 +103,22 @@ class ProductControllerTest {
         //assertEquals(productDtoResult, productDto); cannot directly compare 2 objects
     }
 
+
+    @DisplayName("ProductId passed is 1. Expecting ProductService also to be called with productId 1. If this fails, ProductService is not called with productId as 1")
+    @Test
+    public void Test_GetProductById_ServiceCalledWithExpectedArguments_RunsSuccessfully() throws Exception {
+        //Arrange
+        Long productId = 10L;
+        Product product = new Product();
+        product.setName("Ice Cream");
+        when(productService.getProductById(productId)).thenReturn(product);
+
+        //Act
+        productController.getProductById(productId);
+
+        //Assert
+        verify(productService).getProductById(idCaptor.capture());
+        assertEquals(productId, idCaptor.getValue());
+    }
     // Homework : write Service layer and Client UT and all other fns here or in API test
 }
