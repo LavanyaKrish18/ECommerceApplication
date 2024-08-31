@@ -64,21 +64,22 @@ public class ProductController {
         return productConverter.getProductDto(responseProduct);
     }
 
-    //Not working - HttpClientErrorException
+    //TODO : FakeStoreAPI - HttpClientErrorException thrown
     @PostMapping
     public ProductDto createProduct(@RequestBody ProductDto productDto) {
         Product responseProduct = productService.createProduct(productConverter.getProduct(productDto));
         return productConverter.getProductDto(responseProduct);
     }
 
-    //Not working - ResourceAccessException
+    // TODO : FakeStoreAPI - ResourceAccessException thrown
+    // StorageProduct Service - Change of Name and price fields is only implemented
     @PatchMapping("{id}")
     public ProductDto replacePartialProduct(@PathVariable Long id, @RequestBody ProductDto productDto) {
         Product responseProduct = productService.replacePartialProduct(id, productConverter.getProduct(productDto));
         return productConverter.getProductDto(responseProduct);
     }
 
-    // Deleted product is printed, still i can get the product in GET Api request
+    // TODO : FakeStoreAPI - Expected ? Deleted product is printed, still i can get the product in GET Api request
     @DeleteMapping("{id}")
     public ProductDto deleteProduct(@PathVariable Long id) {
         Product responseProduct = productService.deleteProduct(id);

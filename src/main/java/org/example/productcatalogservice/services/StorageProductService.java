@@ -27,7 +27,7 @@ public class StorageProductService implements IProductService{
 
     @Override
     public List<Product> getAllProducts() {
-        return List.of();
+        return productRepo.findAll();
     }
 
     @Override
@@ -37,16 +37,43 @@ public class StorageProductService implements IProductService{
 
     @Override
     public Product replaceProduct(Long id, Product product) {
-        return null;
+        Product responseProduct = null;
+        Optional<Product> optionalProduct = productRepo.findById(id);
+        if (optionalProduct.isPresent()) {
+            Product existingProduct = optionalProduct.get();
+            product.setId(existingProduct.getId()); // Preserve the original ID
+            responseProduct = productRepo.save(product);      // Save the new product
+        }
+        return responseProduct;
     }
 
     @Override
     public Product replacePartialProduct(Long id, Product product) {
-        return null;
+        Product responseProduct = null;
+        Optional<Product> optionalProduct = productRepo.findById(id);
+        if (optionalProduct.isPresent()) {
+            Product existingProduct = optionalProduct.get();
+            if (product.getName() != null) {
+                existingProduct.setName(product.getName());
+            }
+            if (product.getPrice() != null) {
+                existingProduct.setPrice(product.getPrice());
+            }
+            // Add other fields similarly
+            responseProduct = productRepo.save(existingProduct);
+        }
+        return responseProduct;
     }
 
     @Override
     public Product deleteProduct(Long id) {
-        return null;
+        Product responseProduct = null;
+        Optional<Product> optionalProduct = productRepo.findById(id);
+        if (optionalProduct.isPresent()) {
+            responseProduct = optionalProduct.get();
+            productRepo.deleteById(id);
+        }
+        return responseProduct;
     }
+
 }
