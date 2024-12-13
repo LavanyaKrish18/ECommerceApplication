@@ -21,4 +21,5 @@ public interface IProductService {
 
     public Product deleteProduct(Long id);
 
+    public Product getProductBasedOnUserRole(Long userId, Long productId);
 }

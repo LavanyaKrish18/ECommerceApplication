@@ -43,6 +43,13 @@ public class ProductController {
 //        return productConverter.getProductDto(Objects.requireNonNull(product));
 //    }
 
+
+    @GetMapping("{userId}/{productId}")
+    public ProductDto getProductBasedOnUserRole(@PathVariable("userId") Long userId, @PathVariable("productId") Long productId) {
+        Product product = productService.getProductBasedOnUserRole(userId, productId);
+        return productConverter.getProductDto(product);
+    }
+
     // To override dispatcher servlet's response
     @GetMapping("{id}")
     public ResponseEntity<ProductDto> getProductById(@PathVariable("id") Long productId) {

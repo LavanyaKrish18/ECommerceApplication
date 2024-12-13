@@ -69,4 +69,9 @@ public class FakeStoreProductService implements IProductService {
         FakeStoreProductDto responseFakeStoreProductDto = fakeStoreApiClient.deleteProduct(id);
         return productConverter.getProduct(Objects.requireNonNull(responseFakeStoreProductDto));
     }
+
+    @Override
+    public Product getProductBasedOnUserRole(Long userId, Long productId) {
+        return null;
+    }
 }

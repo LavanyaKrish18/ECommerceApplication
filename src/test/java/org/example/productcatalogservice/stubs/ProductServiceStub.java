@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-@Primary
 public class ProductServiceStub implements IProductService {
 
     Map<Long, Product> productMap;
@@ -67,5 +66,10 @@ public class ProductServiceStub implements IProductService {
         Product productDeleted = productMap.get(id);
         productMap.remove(id);
         return productDeleted;
+    }
+
+    @Override
+    public Product getProductBasedOnUserRole(Long userId, Long productId) {
+        return null;
     }
 }
