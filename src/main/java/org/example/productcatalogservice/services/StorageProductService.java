@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service("sps")
-@Primary
+//@Primary
 public class StorageProductService implements IProductService{
 
     @Autowired
@@ -88,6 +88,10 @@ public class StorageProductService implements IProductService{
         UserDto userDto = restTemplate.getForEntity("http://userauthenticationservice/user/{userId}", UserDto.class, userId).getBody();
 
         if(userDto != null) {
+            // Homework - Service Discovery class - Eureka server class - Spring Cloud
+            // If Product is a private product
+            // If yes, Check for the role if he is the admin or owner of the product
+            // Then only return product, else return null
             System.out.println("Received User");
             return product;
         }
